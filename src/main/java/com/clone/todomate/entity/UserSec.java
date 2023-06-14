@@ -12,15 +12,14 @@ import lombok.*;
 @Setter
 public class UserSec {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Column(name="user_email", length = 324)
+    private String email;
 
-
-    /*
-    FetchType.EAGER: 조회할 때 관련 모든 엔티티 전부 가져옴 (default)
-     */
     @OneToOne(fetch=FetchType.LAZY)
+    @MapsId
+    @JoinColumn(name = "user_email")
     private User user;
 
+    @Column(length = 45)
     private String salt;
 }

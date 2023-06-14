@@ -2,30 +2,41 @@ package com.clone.todomate.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.ColumnDefault;
 
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 @ToString
 @Getter
 @Setter
-@Table(indexes = @Index(name="i_user", columnList = "name, email"))
+//@Table(indexes = @Index(name="i_user", columnList = "name, email"))
 public class User {
     @Id // pk
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    private String name;
-
-    @Column(length = 25, nullable = false)
+    @Column(length = 324)
     private String email;
 
-    @Column(name="helloWorld")
-    private String helloWorld;
+    @Column(length = 12, unique = true, nullable = false)
+    private String id;
 
-    public User(String name, String email, String helloWorld) {
-        this.name = name;
-        this.email = email;
-        this.helloWorld = helloWorld;
-    }
+    @Column(length = 64, nullable = false)
+    private String pw;
+
+    @Column(length = 16)
+    private String name;
+
+    @Column(length = 255)
+    private String description;
+
+    // TODO: 이미지는 보통 DB에 저장안하지 않나?
+    @Column(length = 45)
+    private String profile;
+
+    // TODO: 다양한 브라우저에서 동시 접속 문제
+    @Column(length = 32)
+    private String refresh_token;
+
+    @Column(columnDefinition="TINYINT(1) default 0")
+    private boolean certification;
 }
