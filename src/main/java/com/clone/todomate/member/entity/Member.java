@@ -12,7 +12,7 @@ import org.hibernate.annotations.ColumnDefault;
 @Getter
 @Setter
 //@Table(indexes = @Index(name="i_user", columnList = "name, email"))
-public class User {
+public class Member extends BaseEntity {
     @Id // pk
     @Column(length = 324)
     private String email;
